@@ -228,7 +228,82 @@ class CacheTests < ThinpTestCase
     end
   end
 
-  define_tests_across(:cache_sizing_effect, POLICY_NAMES)
+  def test_cache_sizing_effect_oops
+    do_git_extract_cache_quick(:policy => Policy.new('mq'), :nr_tags => 1, :data_size => gig(2), :cache_size => 64)
+  end
+
+  def test_cache_sizing_effect_default
+    do_cache_sizing_effect('default')
+  end
+
+  def test_cache_sizing_effect_mq
+    do_cache_sizing_effect('mq')
+  end
+
+  def test_cache_sizing_effect_basic
+    do_cache_sizing_effect('basic')
+  end
+
+  def test_cache_sizing_effect_multiqueue
+    do_cache_sizing_effect('multiqueue')
+  end
+
+  def test_cache_sizing_effect_multiqueue_ws
+    do_cache_sizing_effect('multiqueue_ws')
+  end
+
+  def test_cache_sizing_effect_q2
+    do_cache_sizing_effect('q2')
+  end
+
+  def test_cache_sizing_effect_twoqueue
+    do_cache_sizing_effect('twoqueue')
+  end
+
+  def test_cache_sizing_effect_fifo
+    do_cache_sizing_effect('fifo')
+  end
+
+  def test_cache_sizing_effect_filo
+    do_cache_sizing_effect('filo')
+  end
+
+  def test_cache_sizing_effect_lfu
+    do_cache_sizing_effect('lfu')
+  end
+
+  def test_cache_sizing_effect_mfu
+    do_cache_sizing_effect('mfu')
+  end
+
+  def test_cache_sizing_effect_lfu_ws
+    do_cache_sizing_effect('lfu_ws')
+  end
+
+  def test_cache_sizing_effect_mfu_ws
+    do_cache_sizing_effect('mfu_ws')
+  end
+
+  def test_cache_sizing_effect_lru
+    do_cache_sizing_effect('lru')
+  end
+
+  def test_cache_sizing_effect_mru
+    do_cache_sizing_effect('mru')
+  end
+
+  def test_cache_sizing_effect_noop
+    do_cache_sizing_effect('noop')
+  end
+
+  def test_cache_sizing_effect_random
+    do_cache_sizing_effect('random')
+  end
+
+  def test_cache_sizing_effect_dumb
+    do_cache_sizing_effect('dumb')
+  end
+>>>>>>> test_cache_sizing_effect_oops: set policy name
 
   tag :linear_target
   def test_git_extract_linear
