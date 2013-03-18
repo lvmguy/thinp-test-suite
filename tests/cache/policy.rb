@@ -15,6 +15,7 @@ class CheckedPolicy < Policy
     @opts = opts
 
     @mq_module_policies = ['default', 'mq']
+    @backgound_module_policies = ['background']
     @basic_module_policies = ['basic', 'multiqueue', 'multiqueue_ws', 'q2', 'twoqueue',
                               'fifo', 'filo', 'lfu', 'mfu', 'lfu_ws', 'mfu_ws', 'lru',
                               'mru', 'noop', 'random', 'dumb']
@@ -23,7 +24,11 @@ class CheckedPolicy < Policy
   end
 
   def is_valid_policy_name(name = @name)
-    (@mq_module_policies + @basic_module_policies).include?(name)
+    (@mq_module_policies + @background_module_policies + @basic_module_policies).include?(name)
+  end
+
+  def is_background_module(name = @name)
+    @background_module_policies.include?(@name)
   end
 
   def is_basic_module(name = @name)
@@ -45,7 +50,9 @@ class CheckedPolicy < Policy
   end
 
   def run_test(policy_opts = @opts)
-    if is_basic_module
+    if is_background_module
+       true
+    else if is_basic_module
       if is_basic_multiqueue
         true # multiqueue_threshold only with basic module multiqueue policies
       elsif policy_opts[:multiqueue_timeout].nil?

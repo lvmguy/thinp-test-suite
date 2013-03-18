@@ -179,6 +179,12 @@ class CacheTests < ThinpTestCase
                                :data_size => gig(2))
   end
 
+  def test_git_extract_cache_quick_background
+    do_git_extract_cache_quick(:policy => Policy.new('background', opts = { policy => 'mq', clean_block_pool_size => 32 } ),
+                               :cache_size => meg(256),
+                               :data_size => gig(2))
+  end
+
   def do_git_extract_only_cache_quick(opts = Hash.new)
     opts = {
       :policy     => opts.fetch(:policy, Policy.new('basic')),
