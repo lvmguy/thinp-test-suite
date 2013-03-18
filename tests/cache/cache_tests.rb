@@ -309,7 +309,6 @@ class CacheTests < ThinpTestCase
   def test_cache_sizing_effect_dumb
     do_cache_sizing_effect('dumb')
   end
->>>>>>> test_cache_sizing_effect_oops: set policy name
 
   tag :linear_target
   def test_git_extract_linear
